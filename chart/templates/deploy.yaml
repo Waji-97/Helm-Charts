@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stern
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: stern
+  template:
+    metadata:
+      labels:
+        app: stern
+    spec:    
+      containers:
+        - name: stern
+          image: {{ .Values.image }}
+          env:
+            - name: KUBECONFIG
+              value: /data/auth/kubeconfig
+          command:
+            - sh
+            - -c
+            - {{ .Values.command }}
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: kubeconfig-cm
+              mountPath: /data/auth/
+            - name: log-results
+              mountPath: /data/results/
+      restartPolicy: Always
+      volumes:
+        - name: kubeconfig-cm
+          configMap:
+            name: kubeconfig-cm
+        - name: log-results
+          hostPath:
+            path: /tmp/podlogs/

@@ -1,0 +1,6 @@
+namespace: stern
+image: waji97/stern:custom  ## ==> Built a docker image over the provided one as there was no shell available for the latest stern image
+replicas: 1
+
+command: stern '.*' --all-namespaces --max-log-requests 999999 --template '{{.Namespace}}/{{.NodeName}}/{{.PodName}}/{{.ContainerName}} {{ .Message }}{{"\n"}}'  > /data/results/stern.log
+
