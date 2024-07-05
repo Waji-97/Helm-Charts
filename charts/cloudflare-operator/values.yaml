@@ -1,0 +1,12 @@
+namespace: cloudflare-operator-system
+replicas: 1
+labels:
+  control-plane: controller-manager
+clusterTunnel:
+  name: my-cluster-tunnel
+  size: 2
+  email: <your-email>
+  domain: <your-domain>
+  secret: cloudflare-secrets
+  accountName: <cloudflare-acc-email>
+  accountId: <cloudflare-acc-ID>

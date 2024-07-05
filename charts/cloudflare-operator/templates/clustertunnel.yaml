@@ -1,0 +1,17 @@
+apiVersion: networking.cfargotunnel.com/v1alpha1
+kind: ClusterTunnel
+metadata:
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-weight": "2"
+  name: cloudflare-cluster-tunnel      # The ClusterTunnel Custom Resource Name
+spec:
+  newTunnel:
+    name: {{ .Values.clusterTunnel.name }}
+  size: {{ .Values.clusterTunnel.size }}                      # This is the number of replicas for cloudflared
+  cloudflare:
+    email: {{ .Values.clusterTunnel.email }}
+    domain: {{ .Values.clusterTunnel.domain }}
+    secret: {{ .Values.clusterTunnel.secret }}
+    accountName: {{ .Values.clusterTunnel.accountName }}
+    accountId: {{ .Values.clusterTunnel.accountId }}

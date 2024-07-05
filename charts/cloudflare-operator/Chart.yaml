@@ -1,0 +1,11 @@
+apiVersion: v2
+appVersion: "v0.10.0"
+description: A Helm chart for cloudflare operator
+name: cloudflare-operator
+version: 0.10.0
+home: https://github.com/adyanth/cloudflare-operator
+maintainers:
+  - name: waji
+    email: wajiwos14@gmail.com
+sources:
+  - https://github.com/adyanth/cloudflare-operator
